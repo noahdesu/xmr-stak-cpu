@@ -186,12 +186,12 @@ static inline void sub_word(uint8_t* key)
 	key[2] = Sbox[key[2]];
 	key[3] = Sbox[key[3]];
 }
-
 __m128i soft_aeskeygenassist(__m128i key, uint8_t rcon)
 {
 	uint32_t X1 = _mm_cvtsi128_si32(_mm_shuffle_epi32(key, 0x55));
 	uint32_t X3 = _mm_cvtsi128_si32(_mm_shuffle_epi32(key, 0xFF));
 	sub_word((uint8_t*)&X1);
 	sub_word((uint8_t*)&X3);
-	return _mm_set_epi32(_rotr(X3, 8) ^ rcon, X3,_rotr(X1, 8) ^ rcon, X1);
+	return key;
+	//return _mm_set_epi32(rotr(X3, 8) ^ rcon, X3,rotr(X1, 8) ^ rcon, X1);
 }

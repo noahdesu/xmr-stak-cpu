@@ -1,5 +1,5 @@
 #pragma once
-#include <string.h>
+#include <string>
 #include <assert.h>
 
 // Structures that we use to pass info between threads constructors are here just to make

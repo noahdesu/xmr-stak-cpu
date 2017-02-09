@@ -76,7 +76,7 @@ inline void sock_close(SOCKET s)
 inline const char* sock_strerror(char* buf, size_t len)
 {
 	buf[0] = '\0';
-	return strerror_r(errno, buf, len);
+	//return strerror_r(errno, buf, len);
 }
 
 inline const char* sock_gai_strerror(int err, char* buf, size_t len)

@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <assert.h>
 #include <time.h>
+#include <strings.h>
 #include "executor.h"
 #include "jpsock.h"
 #include "minethd.h"

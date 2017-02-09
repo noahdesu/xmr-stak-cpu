@@ -80,12 +80,13 @@ void reset_colour()
 }
 
 #else
-#include <termios.h>
+//#include <termios.h>
 #include <unistd.h>
 #include <stdio.h>
 
 int get_key()
 {
+#if 0
 	struct termios oldattr, newattr;
 	int ch;
 	tcgetattr( STDIN_FILENO, &oldattr );
@@ -95,6 +96,8 @@ int get_key()
 	ch = getchar();
 	tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
 	return ch;
+#endif
+  return 0;
 }
 
 void set_colour(out_colours cl)

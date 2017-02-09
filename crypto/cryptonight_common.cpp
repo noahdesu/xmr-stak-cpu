@@ -130,7 +130,7 @@ cryptonight_ctx* cryptonight_alloc_ctx(size_t use_fast_mem, size_t use_mlock, al
 	}
 #else
 	ptr->long_state = (uint8_t*)mmap(0, MEMORY, PROT_READ | PROT_WRITE,
-		MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB | MAP_POPULATE, 0, 0);
+		MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
 
 	if (ptr->long_state == MAP_FAILED)
 	{
@@ -141,14 +141,14 @@ cryptonight_ctx* cryptonight_alloc_ctx(size_t use_fast_mem, size_t use_mlock, al
 
 	ptr->ctx_info[0] = 1;
 
-	if(madvise(ptr->long_state, MEMORY, MADV_RANDOM|MADV_WILLNEED) != 0)
+//	if(madvise(ptr->long_state, MEMORY, MADV_RANDOM|MADV_WILLNEED) != 0)
 		msg->warning = "madvise failed";
 
 	ptr->ctx_info[1] = 0;
-	if(use_mlock != 0 && mlock(ptr->long_state, MEMORY) != 0)
+//	if(use_mlock != 0 && mlock(ptr->long_state, MEMORY) != 0)
 		msg->warning = "mlock failed";
-	else
-		ptr->ctx_info[1] = 1;
+//	else
+//		ptr->ctx_info[1] = 1;
 
 	return ptr;
 #endif // _WIN32
@@ -161,8 +161,8 @@ void cryptonight_free_ctx(cryptonight_ctx* ctx)
 #ifdef _WIN32
 		VirtualFree(ctx->long_state, 0, MEM_RELEASE);
 #else
-		if(ctx->ctx_info[1] != 0)
-			munlock(ctx->long_state, MEMORY);
+//		if(ctx->ctx_info[1] != 0)
+//			munlock(ctx->long_state, MEMORY);
 		munmap(ctx->long_state, MEMORY);
 #endif // _WIN32
 	}

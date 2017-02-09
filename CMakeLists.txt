@@ -50,8 +50,11 @@ if(USE_HTTPD)
     set(SOURCES ${SOURCES} httpd.cpp)
 endif(USE_HTTPD)
 
+include_directories("/home/nwatkins/nacl_sdk/pepper_49/include/newlib")
+link_directories("/home/nwatkins/nacl_sdk/pepper_49/lib/clang-newlib_x86_64/Release/")
+
 add_executable(xmr-stak-cpu ${SOURCES})
-target_link_libraries(xmr-stak-cpu pthread)
+target_link_libraries(xmr-stak-cpu pthread nacl_io)
 
 if(USE_HTTPD)
     target_link_libraries(xmr-stak-cpu microhttpd)
